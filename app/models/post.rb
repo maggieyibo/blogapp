@@ -5,4 +5,9 @@ class Post
   field :body, type: String
 
   validates :title, :body, presence: true
+
+  def date_published
+	created_at.localtime.strftime("%A, %B %-d, %Y at %l:%M %p")
+  end
+
 end
