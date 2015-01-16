@@ -1,8 +1,8 @@
-<% @posts.reverse.each do |post| %>
+<% @posts.each do |post| %>
 <div>
  <h3><%= link_to post.title, post %></h3>
  <p><%= post.body%></p>
- <small><%= post.created_at.strftime("Created at: %a %F")%></small>
+ <small><%= post.date_published %></small>
 </div>
 <br>
 <br>

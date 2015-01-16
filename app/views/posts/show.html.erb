@@ -7,4 +7,27 @@
 <br>
 <br>
 
+<div>
+<h4> Comments: </h4>
+<%= @comments.each do |comment| %>
+<p>
+<%= comment.body %>
+<br>
+<%= comment.created_at %>
+</p>
+
+<%end %>
+
+<h4> Create a comment: </h4>
+  <%= form_for(@new_comment) do |f| %>
+
+	<%= f.text_area :body %>
+	<%= f.hidden_field :post_id, value: @post.id %>
+
+	<%= f.submit "Add Comment" %>
+
+<% end %>
+
+</div>
+
 <%= link_to "View All", posts_path %>
