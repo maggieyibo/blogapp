@@ -10,24 +10,49 @@
 <div>
 <h4> Comments: </h4>
 <%= @comments.each do |comment| %>
+
+<% if comment.commenter %> 
+<h3>
+<%= comment.commenter.name %>
+<%= comment.commenter.email %>
+</h3>
 <p>
 <%= comment.body %>
 <br>
-<%= comment.created_at %>
-</p>
+<%= comment.date_published %>
+<% else %>
+<p>
+<%= comment.body %>
+<br>
+<%= comment.date_published %>
+<br>
+<% end %>
+
 
 <%end %>
 
 <h4> Create a comment: </h4>
-  <%= form_for(@new_comment) do |f| %>
-
-	<%= f.text_area :body %>
-	<%= f.hidden_field :post_id, value: @post.id %>
-
-	<%= f.submit "Add Comment" %>
-
+<%= form_for [@post, @new_comment] do |f| %>
+    <%= f.fields_for :commenter_attributes do |commenter_fields| %>
+        <div>
+            <%= commenter_fields.label :name %>
+            <%= commenter_fields.text_field :name %>
+        </div>
+        <div>
+            <%= commenter_fields.label :email %>
+            <%= commenter_fields.text_field :email %>
+          </div>
+    <% end %>
+    <div>
+        <%= f.label :body, "New comment:" %>
+        <%= f.text_area :body %>
+    </div>
+    <%= f.submit "Add your comment!" %>
 <% end %>
 
-</div>
+	
 
-<%= link_to "View All", posts_path %>
+
+
+
+

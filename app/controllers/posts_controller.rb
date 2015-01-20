@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 	def show
 		@post = Post.find(params[:id])
 		@comments = @post.comments.order_by(created_at: :asc)
-		@new_comment = Comment.new(post_id: @post.id)
+		@new_comment = Comment.new
 	end
 
 	def new
